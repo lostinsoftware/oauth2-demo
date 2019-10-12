@@ -1,0 +1,11 @@
+version: '2'
+services:
+  oauth2demo-postgresql:
+    image: postgres:11.5
+    # volumes:
+    #     - ~/volumes/jhipster/oauth2demo/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=oauth2demo
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
