@@ -4,7 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-import org.springframework.security.oauth2.core.oidc.OidcIdToken;
+// import org.springframework.security.oauth2.core.oidc.OidcIdToken;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +33,8 @@ public class LogoutResource {
      */
     @PostMapping("/api/logout")
     public ResponseEntity<?> logout(HttpServletRequest request,
-                                    @AuthenticationPrincipal(expression = "idToken") OidcIdToken idToken) {
+                                    @AuthenticationPrincipal Jwt idToken) {
+//                                    @AuthenticationPrincipal(expression = "idToken") OidcIdToken idToken) {
         String logoutUrl = this.registration.getProviderDetails()
             .getConfigurationMetadata().get("end_session_endpoint").toString();
 

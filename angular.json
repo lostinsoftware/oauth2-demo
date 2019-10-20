@@ -26,7 +26,13 @@
         }
       },
       "prefix": "jhi",
-      "architect": {}
+      "architect": {
+        "build": {
+          "options": {
+            "scripts": ["./node_modules/keycloak-js/dist/keycloak.min.js"]
+          }
+        }
+      }
     }
   },
   "defaultProject": "oauth-2-demo",

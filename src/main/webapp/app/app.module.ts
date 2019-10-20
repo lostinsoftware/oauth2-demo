@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import './vendor';
@@ -15,6 +15,12 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 
+import { KeycloakService } from './core/auth/keycloak.service';
+
+export function kcFactory(keycloakService: KeycloakService): () => void {
+  return () => keycloakService.init();
+}
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -26,6 +32,15 @@ import { ErrorComponent } from './layouts/error/error.component';
     Oauth2DemoAppRoutingModule
   ],
   declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  providers: [
+    KeycloakService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: kcFactory,
+      deps: [KeycloakService],
+      multi: true
+    }
+  ],
   bootstrap: [JhiMainComponent]
 })
 export class Oauth2DemoAppModule {}

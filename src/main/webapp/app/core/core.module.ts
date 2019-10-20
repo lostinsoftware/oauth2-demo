@@ -17,6 +17,7 @@ import { NgbDateMomentAdapter } from 'app/shared/util/datepicker-adapter';
 import { AuthExpiredInterceptor } from 'app/blocks/interceptor/auth-expired.interceptor';
 import { ErrorHandlerInterceptor } from 'app/blocks/interceptor/errorhandler.interceptor';
 import { NotificationInterceptor } from 'app/blocks/interceptor/notification.interceptor';
+import { TokenInterceptor } from '../blocks/interceptor/token.interceptor';
 
 import { fontAwesomeIcons } from './icons/font-awesome-icons';
 
@@ -66,6 +67,11 @@ import { fontAwesomeIcons } from './icons/font-awesome-icons';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: NotificationInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
       multi: true
     }
   ]
